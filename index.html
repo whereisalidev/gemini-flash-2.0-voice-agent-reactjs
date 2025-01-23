@@ -29,6 +29,25 @@
         .button-group {
             margin-bottom: 20px;
         }
+        
+        .container {
+        text-align: center;
+        }
+
+        button {
+        padding: 15px 30px;
+        font-size: 16px;
+        border: none;
+        border-radius: 25px;
+        width: 30vh;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        }
+        #startButton {
+        background-color: black;
+        color: white;
+        }
+
     </style>
 </head>
 
@@ -45,10 +64,13 @@
                 <div class="demo-content">
                     <!-- Voice Control Buttons -->
                     <div class="button-group">
-                        <button id="startButton"
+                        <!-- <button id="startButton"
                             class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                             <i class="material-icons">mic</i>
-                        </button>
+                        </button> -->
+                        <div class="container">
+                            <button id="startButton" data-state="start" class="inactive">Start a call</button>
+                        </div>
                         <button id="stopButton"
                             class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
                             <i class="material-icons">mic_off</i>
@@ -80,6 +102,16 @@
         });
 
         const startButton = document.getElementById('startButton');
+        // if (startButton.innerHTML == "Start a call"){
+        //     startButton.innerHTML == "End call"
+        //     startButton.style.backgroundColor = "red";
+        //     startButton.style.color = "black";
+        // }
+        // else if(startButton.innerHTML == "End call"){
+        //     startButton.innerHTML == "Start a call"
+        //     startButton.style.backgroundColor = "black";
+        //     startButton.style.color = "white";
+        // }
         const stopButton = document.getElementById('stopButton');
         let stream = null;
         let currentFrameB64;
@@ -151,7 +183,7 @@
 
             webSocket.onclose = (event) => {
                 console.log("websocket closed: ", event);
-                alert("Connection closed");
+                // alert("Connection closed");
             };
 
             webSocket.onerror = (event) => {
@@ -334,10 +366,29 @@
             const div = document.getElementById(divId);
             div.appendChild(newParagraph);
         }
+        
+        startButton.addEventListener('click', ()=> {
+            if (startButton.dataset.state === "start") {
+                startButton.innerHTML = "End call";
+                startButton.style.backgroundColor = "red";
+                startButton.style.color = "black";
+                startButton.dataset.state = "end";
+                startAudioInput();
+                initializeAudioContext();
+                connect();
+            } else if (startButton.dataset.state === "end") {
+                startButton.innerHTML = "Start a call";
+                startButton.style.backgroundColor = "black";
+                startButton.style.color = "white";
+                startButton.dataset.state = "start"; 
+                stopAudioInput(); 
+                webSocket.close(1000, "Normal closure");
+                
+            }
+        });
 
-        startButton.addEventListener('click', startAudioInput);
-        stopButton.addEventListener('click', stopAudioInput);
-
+        // startButton.addEventListener('click', ()=>{
+        // });
 
         class Response {
             constructor(data) {

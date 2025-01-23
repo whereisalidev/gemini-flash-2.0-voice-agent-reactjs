@@ -83,7 +83,7 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
                                     print('\n<Turn complete>')
                         except websockets.exceptions.ConnectionClosedOK:
                             print("Client connection closed normally (receive)")
-                            break  # Exit the loop if the connection is closed
+                            break  
                         except Exception as e:
                             print(f"Error receiving from Gemini: {e}")
                             break 
@@ -94,9 +94,7 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
                       print("Gemini connection closed (receive)")
 
 
-            # Start send loop
             send_task = asyncio.create_task(send_to_gemini())
-            # Launch receive loop as a background task
             receive_task = asyncio.create_task(receive_from_gemini())
             await asyncio.gather(send_task, receive_task)
 
@@ -110,7 +108,7 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
 async def main() -> None:
     async with websockets.serve(gemini_session_handler, "localhost", 9083):
         print("Running websocket server localhost:9083...")
-        await asyncio.Future()  # Keep the server running indefinitely
+        await asyncio.Future() 
 
 
 if __name__ == "__main__":
