@@ -1,4 +1,4 @@
-## pip install --upgrade google-genai==0.3.0##
+## pip install --upgrade google-genai==0.3.0
 import asyncio
 import json
 import os
@@ -8,7 +8,7 @@ import base64
 
 # Load API key from environment
 os.environ['GOOGLE_API_KEY'] = 'AIzaSyARWYNN8Pn1HPkIbLnuNRCRG6caDNv1ezQ'
-MODEL = "gemini-2.0-flash-exp"  # use your model ID
+MODEL = "gemini-2.0-flash-exp"
 
 client = genai.Client(
   http_options={
