@@ -1,19 +1,18 @@
 .action-button {
   display: flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   background: black;
-  width: 233px;
+  width: 205px;
   color: white;
   font-size: 1.25rem;
   line-height: 1.75rem;
-  text-transform: lowercase;
   cursor: pointer;
   animation: opacity-pulse 3s ease-in infinite;
   transition: all 0.2s ease-in-out;
   border-style: none;
   height: 48px;
-  border-radius: 18px;
+  border-radius: 28px;
   user-select: none;
   cursor: pointer;
 
@@ -115,13 +114,18 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
+    border-radius: 2vh;
+    border: 1px solid rgb(207, 206, 206);
+    padding: 2vh 5vh;
 
-    .connection-button-container {
-      border-radius: 27px;
-      border: 1px solid var(--Neutral-30);
-      background: black;
-      padding: 10px;
-    }
+    // .connection-button-container {
+    //   border-radius: 27px;
+    //   border: 1px solid var(--Neutral-30);
+    //   background: black;
+    //   padding: 10px;
+    //   display: flex;
+    //   max-width: 30vh;
+    // }
 
     .text-indicator {
       font-size: 11px;
