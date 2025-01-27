@@ -17,7 +17,6 @@ function App() {
         <div className="streaming-console">
           <main>
             <ControlTray supportsVideo={false}>
-              {/* No need for video-related buttons */}
             </ControlTray>
           </main>
         </div>
